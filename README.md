@@ -12,6 +12,11 @@ To get started developing right away:
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 
+The service worker works only with the production mode. You can run it in production by using the following commands:
+
+* `npm run build`
+* `serve -s  build`
+
 ## API servers
 
 - Maps JavaScript API
