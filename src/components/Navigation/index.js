@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Button } from "./Button";
+import { Search } from "./Search";
 
 import { List, ListItem } from "./List";
 
@@ -24,6 +25,29 @@ class Navigation extends Component {
       this.setState({ locations: nextProps.markers });
     }
   }
+  searchLocations = e => {
+    const { value } = e.target;
+    const { markers, closeInfoWindow } = this.props;
+
+    // Close info window before starting to search
+    closeInfoWindow();
+
+    const filteredLocations = markers.filter(location => {
+      // Regular expression to match the value
+      // ig = i is for ignore case. g is for global.
+      const matching = new RegExp(value, "ig");
+      if (location.title.match(matching)) {
+        location.setVisible(true);
+      } else {
+        location.setVisible(false);
+      }
+
+      return location.title.match(matching);
+    });
+
+    // Update locations state with filtered locations
+    this.setState({ locations: filteredLocations });
+  };
 
   render() {
     const { openInfoWindow } = this.props;
@@ -47,7 +71,13 @@ class Navigation extends Component {
         >
           Hide places
         </Button>
-       
+        <Search
+          type="text"
+          placeholder="Search"
+          onChange={this.searchLocations}
+          aria-label="Search places"
+          tabIndex="1"
+        />
         <List role="list" aria-label="City places" tabIndex="1">
           {locations.map((marker, index) => (
             <ListItem

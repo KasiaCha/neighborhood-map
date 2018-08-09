@@ -139,7 +139,7 @@ class MapInfo extends Component {
     // Check if the infoWindow is not already opened for this marker
     if (infoWindow.marker !== marker) {
       infoWindow.marker = marker;
-      infoWindow.setContent(`Loading...`);
+      infoWindow.setContent(`We can't load more information now. Check it later.`);
       infoWindow.open(this.map, marker);
 
       // Clear the marker property when it is closed
