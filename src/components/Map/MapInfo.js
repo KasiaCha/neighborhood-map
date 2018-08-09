@@ -150,6 +150,12 @@ class MapInfo extends Component {
 
     this.getMarkerDetails(marker);
 
+    if (infoWindow.map !== map) {
+      infoWindow.map = map;
+      infoWindow.setContent(`We can't load more information now. Check it later.`);
+      infoWindow.open(this.map, marker);
+    }
+    
     // Center map to a marker position
     map.panTo(marker.getPosition());
   };
