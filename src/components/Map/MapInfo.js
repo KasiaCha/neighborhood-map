@@ -46,6 +46,7 @@ class MapInfo extends Component {
 
   componentDidMount() {
     this.loadMap();
+    
   }
 
   // Loading a Google map
@@ -68,6 +69,8 @@ class MapInfo extends Component {
           styles: mapStyle
         }
       );
+      // Information for users about Google maps error
+      window.gm_authFailure = () => { alert('Unable to load Google Maps! Please check your Google API key!');}
 
       // Create infoWindow
       const infoWindow = new google.maps.InfoWindow({ maxWidth: 200 });
@@ -266,7 +269,7 @@ class MapInfo extends Component {
         infoWindow.setContent(content);
       })
       .catch(err => {
-        console.log("Error", err);
+        console.log==("Error", err);
       });
   };
 
